@@ -1,19 +1,19 @@
 function startGame(){
-    snakePosition();
+    snakePosition();   //蛇的方位
     let lose=isOver();
     if(lose){
         document.body.addEventListener('keydown',playAgain);
         return;
     }
-    cleanScreen();
-    checkColi();
+    cleanScreen();  //初始畫面
+    checkColi();    //蛇與蘋果
     let win=isWin();
     if(win){
         document.body.addEventListener('keydown',playAgain);
         return;
     }
-    drawSnake();
-    drawApple();
+    drawSnake();  //生產蛇方塊
+    drawApple();  //生產蘋果方塊
     drawScore();
 
     setSpeed();
@@ -21,24 +21,24 @@ function startGame(){
     setTimeout(startGame,1000/speed);
 }
 
-const canvas=document.getElementById('game');
+const canvas=document.getElementById('game');    //DOM操作，抓住Canvas的id
 const ctx=canvas.getContext('2d');
-class SnakePart{
+class SnakePart{         //遊戲常數設定
     constructor(x,y){
         this.x=x;
         this.y=y;
     }
 }
 let speed=5;
-let tileCount=20;
-let tileSize=canvas.width/tileCount-2;
-let headX=10;
+let tileCount=20;   //地圖大小20*20
+let tileSize=canvas.width/tileCount-2;   //蛇與蘋果方塊寬度是canvas總寬度除20在減2
+let headX=10;  /*蛇初始位址*/
 let headY=10;
 const snakePart=[];
-let tailLen=0;
-let xV=0;
+let tailLen=0;  /*蛇的長度*/
+let xV=0;       //x與y軸方向初始速度
 let yV=0;
-let appleX=5;
+let appleX=5;  //蘋果初始位止
 let appleY=5;
 let score=0;
 
@@ -70,16 +70,16 @@ function isOver(){
 }
 
 function cleanScreen(){
-    ctx.fillStyle='black';
+    ctx.fillStyle='black';   //背景顏色黑色
     ctx.fillRect(0,0,400,400);
 }
 
 function checkColi(){
-    if(appleX==headX&&appleY==headY){
-        appleX=Math.floor(Math.random()*tileCount);
+    if(appleX==headX&&appleY==headY){                //蘋果與蛇碰撞
+        appleX=Math.floor(Math.random()*tileCount);  //隨機產生蘋果
         appleY=Math.floor(Math.random()*tileCount);
-        tailLen++;
-        score++;
+        tailLen++;  //長度加一
+        score++;    //分數加一
         if(score>5 && score%2==0){
             speed++;
         }
@@ -142,6 +142,7 @@ function playAgain(event){
     }
 }
 
+//偵測按鍵
 document.body.addEventListener('keydown',keyDown);
 function keyDown(event){
     //up
