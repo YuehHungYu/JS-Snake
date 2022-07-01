@@ -115,10 +115,10 @@ function drawScore(){
 }
 
 function drawSnake(){
-    ctx.fillStyle="green";
+    ctx.fillStyle="green"; //吃蘋果蛇身體顏色
     for( let i=0;i<snakePart.length;i++){
         let part = snakePart[i];
-        ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize, tileSize);
+        ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize, tileSize); //銜接在蛇頭後
     }
 
     snakePart.push( new SnakePart(headX, headY));
@@ -126,8 +126,8 @@ function drawSnake(){
         snakePart.shift();
     }
 
-    ctx.fillStyle = 'orange';
-    ctx.fillRect(headX * tileCount, headY *tileCount, tileSize, tileSize);
+    ctx.fillStyle = 'orange'; //蛇初始顏色
+    ctx.fillRect(headX * tileCount, headY *tileCount, tileSize, tileSize); //蛇初始位址大小
 }
 
 function setSpeed(){
@@ -145,7 +145,7 @@ function playAgain(event){
 //偵測按鍵
 document.body.addEventListener('keydown',keyDown);
 function keyDown(event){
-    //up
+    //上
     if(event.keyCode==38){
         if(yV==1){
             return;
@@ -153,7 +153,7 @@ function keyDown(event){
         yV=-1;
         xV=0;
     }
-    //down
+    //下
     if(event.keyCode==40){
         if(yV==-1){
             return;
@@ -161,7 +161,7 @@ function keyDown(event){
         yV=1;
         xV=0;
     }
-    //right
+    //右
     if(event.keyCode==39){
         if(xV==-1){
             return;
@@ -169,7 +169,7 @@ function keyDown(event){
         yV=0;
         xV=1;
     }
-    //left
+    //左
     if(event.keyCode==37){
         if(xV==1){
             return;
